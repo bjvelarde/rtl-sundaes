@@ -4,22 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Popover from 'react-bootstrap/Popover';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 
-// const popover = (
-//   <Popover id="popover-basic">
-//     <Popover.Title as="h3">Popover right</Popover.Title>
-//     <Popover.Content>
-//       And here's some <strong>amazing</strong> content. It's very engaging.
-//       right?
-//     </Popover.Content>
-//   </Popover>
-// );
-
-// const Example = () => (
-//   <OverlayTrigger trigger="click" placement="right" overlay={popover}>
-//     <Button variant="success">Click me to see</Button>
-//   </OverlayTrigger>
-// );
-export default function SummaryForm() {
+export default function SummaryForm({ setOrderPhase }) {
 	const [ tcChecked, setTcChecked ] = useState(false);
 
 	const popover = (
@@ -38,7 +23,13 @@ export default function SummaryForm() {
 	);
 
 	return (
-		<Form>
+		<Form
+			onSubmit={(e) => {
+				e.preventDefault();
+				setOrderPhase('confirmation');
+				return false;
+			}}
+		>
 			<Form.Group controlId="terms-and-conditions">
 				<Form.Check
 					type="checkbox"
